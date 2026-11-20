@@ -1,0 +1,12 @@
+{
+  "name": "rotki-agent-tools",
+  "version": "0.1.0",
+  "description": "Unofficial agent skills for rotki users and contributors: diagnose an install from its logs, check a PnL export for data gaps, and draft upstream decoder PRs. No portfolio data access.",
+  "author": {
+    "name": "nuthatch-org",
+    "url": "https://github.com/nuthatch-org"
+  },
+  "repository": "https://github.com/nuthatch-org/rotki-agent-tools",
+  "license": "MIT",
+  "keywords": ["rotki", "crypto", "accounting", "diagnostics", "evm"]
+}

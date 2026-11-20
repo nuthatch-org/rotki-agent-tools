@@ -1,0 +1,17 @@
+{
+  "name": "rotki-agent-tools",
+  "description": "Unofficial Claude Code skills for rotki users and contributors.",
+  "owner": {
+    "name": "nuthatch-org",
+    "url": "https://github.com/nuthatch-org"
+  },
+  "plugins": [
+    {
+      "name": "rotki-agent-tools",
+      "source": "./",
+      "description": "Unofficial agent skills for rotki: rotki-doctor, rotki-reconcile, rotki-decoder.",
+      "repository": "https://github.com/nuthatch-org/rotki-agent-tools",
+      "license": "MIT"
+    }
+  ]
+}

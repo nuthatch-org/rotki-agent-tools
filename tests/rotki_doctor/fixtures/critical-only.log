@@ -1,0 +1,2 @@
+[19/11/2026 09:00:25 CET] CRITICAL rotkehlchen.__main__ MainThread: Traceback (most recent call last):
+RuntimeError: boom

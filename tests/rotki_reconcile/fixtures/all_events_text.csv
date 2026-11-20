@@ -1,0 +1,12 @@
+type,notes,location,timestamp,asset_identifier,free_amount,taxable_amount,price,pnl_taxable,pnl_free,cost_basis_taxable,cost_basis_free,asset,direction,location_path
+trade,Buy 2 ETH,kraken,01/01/2024 10:00:00 CET,ETH,0,2,2000,0,0,,,ETH,in,kraken
+transaction event,https://etherscan.io/tx/0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  ->  Receive 1000 SPAM,ethereum,10/01/2024 12:00:00 CET,eip155:1/erc20:0x3333333333333333333333333333333333333333,0,1000,0,0,0,,,SPAM,in,ethereum
+transaction event,https://etherscan.io/tx/0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb  ->  Swap 1 ETH,ethereum,15/03/2024 10:00:00 CET,ETH,0,1,3500,1500,0,1 / 2  acquired at 01/01/2024 10:00:00 CET for price: 2000,,ETH,out,ethereum
+transaction event,https://etherscan.io/tx/0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc  ->  Swap 500 UNI,ethereum,20/03/2024 10:00:00 CET,eip155:1/erc20:0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984,0,500,10,5000,0,Incomplete cost basis information for spend.,Incomplete cost basis information for spend.,UNI,out,ethereum
+trade,Sell 1.5 ETH,kraken,01/09/2024 10:00:00 CEST,ETH,0,1.5,2500,750,0,1 / 2  acquired at 01/01/2024 10:00:00 CET for price: 2000,,ETH,out,kraken
+trade,Sell 100 EUR,kraken,02/09/2024 10:00:00 CEST,EUR,100,0,1,0,0,,,EUR,out,kraken
+fee,https://etherscan.io/tx/0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd  ->  Burn 0.01 ETH for gas,ethereum,01/12/2024 10:00:00 CET,ETH,0,0.01,3600,-36,0,0.01 / 2  acquired at 01/01/2024 10:00:00 CET for price: 2000,,ETH,out,ethereum
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,rotki version,1.41.2,,,,,,,,
+,,,,,cost_basis_method,fifo,,,,,,,,

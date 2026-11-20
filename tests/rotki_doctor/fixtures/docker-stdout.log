@@ -1,0 +1,2 @@
+2026-11-19T09:00:00.123456Z [core] INFO rotkehlchen.api.server MainThread: Starting rotki 1.41.2
+2026-11-19T09:00:01.000001Z [core] WARNING rotkehlchen.externalapis.coingecko Greenlet-1: Got rate limited by coingecko querying https://api.coingecko.com/x

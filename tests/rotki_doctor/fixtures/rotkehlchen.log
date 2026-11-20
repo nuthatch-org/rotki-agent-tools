@@ -1,0 +1,32 @@
+[19/11/2026 09:00:00 CET] INFO rotkehlchen.api.server MainThread: Starting rotki 1.41.2
+[19/11/2026 09:00:01 CET] DEBUG rotkehlchen.externalapis.etherscan_like Greenlet-3: Using default Etherscan key
+[19/11/2026 09:00:02 CET] DEBUG rotkehlchen.externalapis.etherscan_like Greenlet-3: Got too many requests error from ethereum Etherscan. Will backoff for 1 seconds.
+[19/11/2026 09:00:03 CET] DEBUG rotkehlchen.externalapis.etherscan Greenlet-3: Got response: {"status":"0","message":"NOTOK","result":"Max calls per sec rate limit reached (5/sec)"} from Etherscan while querying chain optimism. Will backoff for 2 seconds.
+[19/11/2026 09:00:04 CET] ERROR rotkehlchen.externalapis.etherscan_like Greenlet-3: Ethereum Etherscan API request to https://api.etherscan.io/v2/api?module=account&action=txlist&apikey=SECRETKEY123 failed due to backing off longer than the max backoff of 5 seconds.
+[19/11/2026 09:00:05 CET] WARNING rotkehlchen.chain.evm.node_inquirer Greenlet-3: Failed to query Etherscan due to Etherscan max daily rate limit reached.. Trying next indexer.
+[19/11/2026 09:00:06 CET] WARNING rotkehlchen.chain.evm.node_inquirer Greenlet-4: Indexer Etherscan doesnt support base with the given API key. Free API access is not supported for this chain. Please upgrade your api plan for full chain coverage. Removing it from the available indexers for this chain.
+[19/11/2026 09:00:07 CET] WARNING rotkehlchen.chain.evm.node_inquirer Greenlet-4: Failed to query Blockscout due to Blockscout has no API key configured, which its endpoint for INK requires. Skipping it.. Trying next indexer.
+[19/11/2026 09:00:08 CET] WARNING rotkehlchen.chain.evm.transactions Greenlet-5: Skipping ethereum transactions query for 0x1111111111111111111111111111111111111111 from 1500000000 to 1600000000, since no configured indexer covers it: Failed to query any indexer. Errors: Blockscout: range not covered
+[19/11/2026 09:00:09 CET] WARNING rotkehlchen.chain.evm.transactions Greenlet-5: Skipping ethereum internal transactions query for 0x1111111111111111111111111111111111111111 from 1500000000 to 1600000000, since no configured indexer covers it: Failed to query any indexer.
+[19/11/2026 09:00:10 CET] WARNING rotkehlchen.chain.evm.node_inquirer Greenlet-5: Failed to query Routescan due to Routescan API request https://api.routescan.io/v2/x failed with HTTP status code 503 and text unavailable. Trying next indexer.
+[19/11/2026 09:00:11 CET] ERROR rotkehlchen.chain.evm.transactions Greenlet-5: Got error "Failed to query any indexer. Errors: Etherscan: Etherscan max daily rate limit reached." while querying gnosis transactions from indexers. Some transactions not added to the DB address: 0x1111111111111111111111111111111111111111 from_ts: 0 to_ts: 1700000000 
+[19/11/2026 09:00:12 CET] WARNING rotkehlchen.chain.evm.transactions Greenlet-6: Skipping scroll transactions query for 0x1111111111111111111111111111111111111111 due to No indexers are available for scroll.
+[19/11/2026 09:00:13 CET] WARNING rotkehlchen.chain.mixins.rpc_nodes Greenlet-7: Failed to connect to ethereum node NodeName(name='my node', endpoint='http://localhost:8545', owned=True, blockchain=<SupportedBlockchain.ETHEREUM: 'ETH'>) at endpoint http://localhost:8545
+[19/11/2026 09:00:14 CET] WARNING rotkehlchen.chain.mixins.rpc_nodes Greenlet-7: Connected to optimism node NodeName(name='op', endpoint='https://mainnet.base.org', owned=True, blockchain=<SupportedBlockchain.OPTIMISM: 'OPTIMISM'>) at endpoint https://mainnet.base.org but it is not on the expected network value 10. The chain id the node is in is 8453.
+[19/11/2026 09:00:15 CET] WARNING rotkehlchen.chain.evm.node_inquirer Greenlet-7: Timed out while querying publicnode for _get_logs: read timeout. Skipping this node in future queries.
+[19/11/2026 09:00:16 CET] WARNING rotkehlchen.chain.evm.node_inquirer Greenlet-7: Failed to query dRPC with position on the query list 0 for _call_contract due to 429 Client Error: Too Many Requests for url: https://eth.drpc.org/
+[19/11/2026 09:00:17 CET] ERROR rotkehlchen.chain.evm.node_inquirer Greenlet-7: Failed to query _get_logs after trying the following nodes: ['dRPC', 'publicnode']. Call parameters were {}
+[19/11/2026 09:00:18 CET] WARNING rotkehlchen.externalapis.coingecko Greenlet-8: Got rate limited by coingecko querying https://api.coingecko.com/api/v3/coins/ethereum/history
+[19/11/2026 09:00:19 CET] WARNING rotkehlchen.externalapis.defillama Greenlet-8: Got rate limited by Defillama querying https://coins.llama.fi/prices
+[19/11/2026 09:00:20 CET] WARNING rotkehlchen.utils.mixins.penalizable_oracle Greenlet-8: Penalizing price oracle coingecko for 1800 seconds due to rate limited
+[19/11/2026 09:00:21 CET] WARNING rotkehlchen.history.price Greenlet-8: Could not query the historical USD price for eip155:1/erc20:0x2222222222222222222222222222222222222222 at time 1650000000 due to: Unable to query a historical price for "eip155:1/erc20:0x2222222222222222222222222222222222222222" to "USD" at 15/04/2022, 07:20:00. Skipping
+[19/11/2026 09:00:22 CET] ERROR rotkehlchen.accounting.accountant Greenlet-9: Skipping event with id 1234  during history processing due to an unexpected remote error: oops
+[19/11/2026 09:00:23 CET] ERROR rotkehlchen.db.upgrade_manager MainThread: Failed at database upgrade from version 48 to 49: no such column: foo
+Traceback (most recent call last):
+  File "rotkehlchen/db/upgrade_manager.py", line 186, in _perform_single_upgrade
+sqlite3.OperationalError: no such column: foo
+[19/11/2026 09:00:24 CET] ERROR rotkehlchen.user_messages MainThread: Wrong password or invalid/corrupt database for user
+[19/11/2026 09:00:25 CET] CRITICAL rotkehlchen.__main__ MainThread: Traceback (most recent call last):
+  File "rotkehlchen/__main__.py", line 32, in main
+ValueError: Tried to open a rotki version intended to work with GlobalDB v12 but the GlobalDB found in the system is v13. Bailing ...
+[19/11/2026 09:00:26 CET] WARNING rotkehlchen.exchanges.binance Greenlet-10: Binance API request failed due to timeout
