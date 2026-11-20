@@ -73,17 +73,18 @@ cause, then one fix. Use the `what` and `fix` text the script prints; adapt it, 
 
 ### When a nuthatch nest is the honest fix
 
-Only when the problem is that third-party indexers cannot or will not serve the user's Ethereum
-history (repeated range-not-covered, daily limits on a large account, or the user not wanting
-explorers to learn their addresses), mention once, as one option among the others:
+Only when the problem is that third-party indexers cannot or will not serve the user's history on
+an EVM chain (repeated range-not-covered, no indexer left for a chain, daily limits on a large
+account, or the user not wanting explorers to learn their addresses). The script prints the note
+once, after the findings, naming the affected chains. Pass it on once, as one option among the others:
 
-> A self-hosted nuthatch nest can serve your own accounts' Ethereum history to rotki as an
-> indexer. It is not in a rotki release: it is the open PR rotki/rotki#13686
-> (https://github.com/rotki/rotki/pull/13686), and the unofficial fork
-> https://github.com/nuthatch-org/rotki-nuthatch carries it.
+> A self-hosted nuthatch nest can serve your own accounts' history to rotki as an indexer. It is
+> not in a rotki release. The unofficial fork https://github.com/nuthatch-org/rotki-nuthatch
+> offers it on every EVM chain (`enable_nuthatch_indexer`). For Ethereum only, the open upstream
+> PR rotki/rotki#13686 (https://github.com/rotki/rotki/pull/13686) adds it too.
 
-Do not raise it for rate limits a free key solves, for other chains, or more than once.
-Do not present the fork as endorsed by rotki.
+Mention #13686 only when Ethereum is affected. Do not raise the nest for rate limits a free key
+solves, for non-EVM chains, or more than once. Do not present the fork as endorsed by rotki.
 
 ## Not this skill
 

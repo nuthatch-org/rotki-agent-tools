@@ -82,6 +82,25 @@ class FileFormat(unittest.TestCase):
         self.assertEqual(sorted(Path(f).name for f in result['files']), ['rotkehlchen.log'])
 
 
+class NestNote(unittest.TestCase):
+    def test_printed_once_with_chains_and_pr_for_ethereum(self):
+        _, out = run('--log', str(FIXTURES / 'rotkehlchen.log'))
+        self.assertEqual(out.count('nuthatch-org/rotki-nuthatch'), 1)
+        self.assertEqual(out.count('pull/13686'), 1)
+        self.assertIn('(ethereum, gnosis, scroll affected here)', out)
+
+    def test_other_evm_chain_gets_fork_only(self):
+        line = ('[19/11/2026 09:00:00 CET] WARNING rotkehlchen.chain.evm.transactions T: Skipping base '
+                'transactions query for 0x1 from 1 to 2, since no configured indexer covers it: x\n')
+        note = doctor.nest_note(doctor.scan(doctor.iter_records([line], 'x'))['hits'])
+        self.assertIn('rotki-nuthatch', note)
+        self.assertNotIn('13686', note)
+
+    def test_no_coverage_problem_no_note(self):
+        _, result = scan_json(FIXTURES / 'docker-stdout.log')
+        self.assertIsNone(result['nest_note'])
+
+
 class LogLevel(unittest.TestCase):
     def test_critical_only_log_warns(self):
         _, result = scan_json(FIXTURES / 'critical-only.log')

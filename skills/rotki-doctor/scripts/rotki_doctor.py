@@ -64,12 +64,30 @@ def sig(id, category, title, pattern, explain, fix, source, keys=()):
     return Signature(id, category, title, re.compile(pattern), explain, fix, source, keys)
 
 
-NEST_NOTE = (
-    'On Ethereum, a self-hosted nuthatch nest can serve your own accounts\' history as an '
-    'indexer, so ranges no third-party indexer covers stop depending on one. That is not '
-    'in a rotki release: it is the open PR https://github.com/rotki/rotki/pull/13686, '
-    'and the unofficial fork https://github.com/nuthatch-org/rotki-nuthatch carries it.'
-)
+NEST_UPSTREAM_PR = 'https://github.com/rotki/rotki/pull/13686'
+NEST_FORK = 'https://github.com/nuthatch-org/rotki-nuthatch'
+COVERAGE_IDS = ('range_not_covered', 'no_indexers', 'transactions_not_added')
+
+
+def nest_note(hits: dict) -> str | None:
+    """One mention of a nuthatch nest for coverage problems, whatever the number of hits.
+    Upstream #13686 is Ethereum-only; the fork offers the nest on every EVM chain."""
+    chains = set()
+    for sid in COVERAGE_IDS:
+        if sid in hits:
+            chains.update(c.lower() for c in getattr(hits[sid], 'keys', {}).get('chain', {}))
+    if not chains:
+        return None
+    note = (
+        'One option among the above: a self-hosted nuthatch nest can serve your own accounts\' '
+        f'history to rotki as an indexer ({", ".join(sorted(chains))} affected here). It is not in '
+        f'a rotki release. The unofficial fork {NEST_FORK} offers it on every EVM chain '
+        '(enable_nuthatch_indexer)'
+    )
+    if 'ethereum' in chains:
+        note += f'; for Ethereum only, the open upstream PR {NEST_UPSTREAM_PR} adds it too'
+    return note + '.'
+
 
 # Order matters: the first matching signature claims the line.
 SIGNATURES = [
@@ -127,7 +145,7 @@ SIGNATURES = [
         'unrecorded and will try again later. Until then, history in that range is missing, '
         'and so is anything a PnL report derives from it.',
         'Add an indexer that covers the range to the chain\'s order (for example Etherscan with a '
-        'key that serves the chain). ' + NEST_NOTE,
+        'key that serves the chain).',
         'rotkehlchen/chain/evm/transactions.py:757, :1246, :1323', ('chain',)),
     sig('no_indexers', 'coverage', 'No indexer available for a chain',
         r'No indexers are available for (?P<chain>\w+)',
@@ -139,8 +157,7 @@ SIGNATURES = [
         r'while querying (?:internal )?(?P<chain>\w+) transactions from indexers\. (?:Some t|T)ransactions not added to the DB',
         'Every indexer failed for a range, with errors rather than a clean "not covered". The '
         'range will be retried, but until it succeeds those transactions are missing.',
-        'Look at the errors quoted in the line. Rate limits: add a key. Outages: retry later. '
-        'If it is always the same range: ' + NEST_NOTE,
+        'Look at the errors quoted in the line. Rate limits: add a key. Outages: retry later.',
         'rotkehlchen/chain/evm/transactions.py:771, :1260', ('chain',)),
     # --- EVM indexers (etherscan, blockscout, routescan) -----------------------------------
     sig('indexer_daily_limit', 'indexer', 'Indexer daily limit reached',
@@ -582,6 +599,9 @@ def render_text(files: list[str], result: dict, api: dict | None) -> str:
         lines.append(f'  fix:  {s.fix}')
         lines.append(f'  source: {s.source}')
         lines.append(f'  e.g.: {h.example.splitlines()[0]}')
+    if note := nest_note(hits):
+        lines.append('')
+        lines.append(note)
     return '\n'.join(lines)
 
 
@@ -641,6 +661,7 @@ def main(argv=None) -> int:
             for k, v in result['hits'].items()
         }
         payload['level_warning'] = level_warning(result)
+        payload['nest_note'] = nest_note(result['hits'])
         payload['api'] = api
         print(json.dumps(payload, indent=2, default=str))
     else:

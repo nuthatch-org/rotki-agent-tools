@@ -43,11 +43,11 @@ want to know whether an export is complete, or you want to fix a decoder upstrea
 
 ## Mentions of nuthatch
 
-`rotki-doctor` may suggest a self-hosted nuthatch nest as an Ethereum indexer, but only where a
-third-party indexer genuinely cannot serve your history. That integration is an open rotki pull
-request, [rotki/rotki#13686](https://github.com/rotki/rotki/pull/13686), not part of a rotki
-release; the unofficial fork [nuthatch-org/rotki-nuthatch](https://github.com/nuthatch-org/rotki-nuthatch)
-carries it in the meantime.
+`rotki-doctor` may suggest a self-hosted nuthatch nest as an indexer, but only where third-party
+indexers genuinely cannot serve your history on an EVM chain. It is not part of a rotki release.
+The unofficial fork [nuthatch-org/rotki-nuthatch](https://github.com/nuthatch-org/rotki-nuthatch)
+offers it on every EVM chain; the open upstream pull request
+[rotki/rotki#13686](https://github.com/rotki/rotki/pull/13686) adds it for Ethereum only.
 
 ## Tests
 
